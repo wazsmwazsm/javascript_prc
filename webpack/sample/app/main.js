@@ -10,4 +10,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import Greeter from './Greeter';
 
+// 导入 css 文件 (也可以使用 require)
+import "./main.css";
+
 render(<Greeter />, document.getElementById('root'));
