@@ -71,10 +71,10 @@
 /***/ (function(module, exports) {
 
 module.exports = function() {
-  var greet = document.createElement('div');
-  greet.textContent = 'Hi there and greetings!';
+    var greet = document.createElement('div');
+    greet.textContent = 'Hi there and greetings!';
 
-  return greet;
+    return greet;
 };
 
 
@@ -85,6 +85,9 @@ module.exports = function() {
 const greeter = __webpack_require__(0);
 
 document.querySelector("#root").appendChild(greeter());
+
+// 手动 webpack 打包
+// webpack {entry file} {destination for bundled file}
 
 
 /***/ })
