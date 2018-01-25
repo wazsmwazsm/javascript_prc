@@ -1,13 +1,17 @@
 const webpack = require('webpack');
 // 此插件依据一个简单的index.html模板，生成一个自动引用你打包后的JS文件的新index.html
-const HtmlWebpackPlugin = require('html-webpack-plugin');;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+// 用于优化的插件
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// 去除 build 文件中的残余文件的插件
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
-    devtool: 'eval-source-map',
+    devtool: 'null',
     entry: __dirname + "/app/main.js", // 唯一入口文件
     output: {
         path: __dirname + "/public", // 打包后的文件存放的地方
-        filename: "bundle.js" //打包后输出文件的文件名
+        filename: "bundle-[hash].js" //打包后输出文件的文件名
     },
     devServer: {
         contentBase: "./public", //本地服务器所加载的页面所在的目录
@@ -49,6 +53,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: __dirname + "/app/index.tmpl.html"
         }),
-        new webpack.HotModuleReplacementPlugin() // 热加载插件
+        new webpack.HotModuleReplacementPlugin(), // 热加载插件
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
+        new ExtractTextPlugin("style.css"),
+        new CleanWebpackPlugin('build/*.*', {
+            root: __dirname,
+            verbose: true,
+            dry: false
+        })
     ]
 }

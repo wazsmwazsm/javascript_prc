@@ -15,7 +15,7 @@ class Greeter extends Component {
     render () {
         return (
             <div className={styles.root}> //使用 cssModule 添加类名的方法 不会造成不同组件之间的污染
-              {config.greetText + 'react'}
+              {config.greetText + ' React'}
             </div>
         );
     }
